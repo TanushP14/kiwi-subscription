@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project KiWI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#1b5e20,#2e7d32,#388e3c);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* Language selector */
+.lang-box{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:5;
+}
+.lang-box select{
+    padding:8px 14px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+}
+
+/* Main Card */
+.card{
+    position:relative;
+    z-index:2;
+    background:#ffffff;
+    width:650px;
+    padding:60px;
+    border-radius:40px;
+    text-align:center;
+    box-shadow:0 35px 70px rgba(0,0,0,0.4);
+}
+
+h1{
+    margin:0;
+    color:#2e7d32;
+    font-size:38px;
+}
+
+.sub{
+    color:#555;
+    margin:12px 0 34px;
+    font-size:18px;
+}
+
+input{
+    width:100%;
+    padding:18px;
+    font-size:18px;
+    border-radius:16px;
+    border:2px solid #ccc;
+    margin-bottom:26px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#2e7d32;
+}
+
+button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    background:#2e7d32;
+    color:white;
+    font-size:20px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#256528;
+}
+
+/* Quote text */
+.quote{
+    margin-top:22px;
+    font-size:16px;
+    font-weight:600;
+    color:#2e7d32;
+    letter-spacing:0.5px;
+}
+
+.message{
+    margin-top:18px;
+    font-weight:600;
+}
+
+.subscribe-btn{
+    margin-top:16px;
+    background:#fbc02d;
+    color:#000;
+}
+
+/* Fullscreen success */
+.fullscreen{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:linear-gradient(135deg,#1b5e20,#2e7d32,#388e3c);
+    justify-content:center;
+    align-items:center;
+}
+
+.full-content{
+    background:#ffffff;
+    padding:70px;
+    border-radius:36px;
+    max-width:850px;
+    text-align:center;
+}
+
+.full-content h2{
+    color:#2e7d32;
+    font-size:36px;
+}
+
+.full-content p{
+    font-size:20px;
+    color:#333;
+    margin-top:14px;
+}
+
+/* Responsive */
+@media(max-width:700px){
+    .card{
+        width:92%;
+        padding:42px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Language Selector -->
+<div class="lang-box">
+    <select id="lang" onchange="changeLang()">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+    </select>
+</div>
+
+<!-- Main Card -->
+<div class="card">
+    <h1 id="title">Project KiWI</h1>
+    <div class="sub" id="subtitle">Smart Agriculture Ecosystem</div>
+
+    <input id="promo" placeholder="Enter promo code">
+
+    <button id="applyBtn" onclick="applyCode()">Apply Promo Code</button>
+
+    <!-- Quote -->
+    <div class="quote">India's Smartest Agriculture Ecosystem</div>
+
+    <div class="message" id="msg"></div>
+
+    <button class="subscribe-btn" id="subBtn" style="display:none"
+        onclick="window.location.href='https://thekidcompany.in/product/fund-our-innovation-project-kiwi-indias-smart-agriculture-ecosystem/'">
+        Subscribe Now
+    </button>
+</div>
+
+<!-- Fullscreen Success -->
+<div class="fullscreen" id="successScreen">
+    <div class="full-content">
+        <h2 id="successTitle">Welcome to Project KiWI 🌱</h2>
+        <p id="successText">
+            You are now part of our ecosystem.
+            You will receive timely updates, progress insights, and opportunities related to our project.
+        </p>
+    </div>
+</div>
+
+<script>
+function applyCode(){
+    const code=document.getElementById("promo").value.trim();
+    const msg=document.getElementById("msg");
+    const subBtn=document.getElementById("subBtn");
+
+    subBtn.style.display="none";
+
+    if(code==="ATKS25KARAMBH"){
+        showSuccess("Krishi Arambh");
+    }
+    else if(code==="ATKS25KPRAGATI"){
+        showSuccess("Krishi Pragati");
+    }
+    else if(code==="ATKS25KSHIKHAR"){
+        showSuccess("Krishi Shikhar");
+    }
+    else{
+        msg.style.color="red";
+        msg.innerText="Invalid promo code";
+        subBtn.style.display="block";
+    }
+}
+
+function showSuccess(plan){
+    const msg=document.getElementById("msg");
+    msg.style.color="green";
+    msg.innerText="Valid promo code ✔ You have successfully subscribed to " + plan;
+
+    setTimeout(()=>{
+        document.getElementById("successScreen").style.display="flex";
+    },2000);
+}
+
+function changeLang(){
+    const lang=document.getElementById("lang").value;
+
+    if(lang==="hi"){
+        title.innerText="प्रोजेक्ट KiWI";
+        subtitle.innerText="स्मार्ट कृषि पारिस्थितिकी तंत्र";
+        promo.placeholder="प्रोमो कोड दर्ज करें";
+        applyBtn.innerText="प्रोमो कोड लागू करें";
+        successTitle.innerText="Project KiWI में आपका स्वागत है 🌱";
+        successText.innerText="अब आप हमारे इकोसिस्टम का हिस्सा हैं। आपको समय-समय पर अपडेट मिलते रहेंगे।";
+    }else{
+        title.innerText="Project KiWI";
+        subtitle.innerText="Smart Agriculture Ecosystem";
+        promo.placeholder="Enter promo code";
+        applyBtn.innerText="Apply Promo Code";
+        successTitle.innerText="Welcome to Project KiWI 🌱";
+        successText.innerText="You are now part of our ecosystem. You will receive timely updates, progress insights, and opportunities related to our project.";
+    }
+}
+</script>
+
+</body>
+</html>
